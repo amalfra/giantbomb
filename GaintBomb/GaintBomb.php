@@ -31,7 +31,7 @@ class GaintBomb {
 	**/
 	function __construct($key = "", $resp = "")
 	{
-	    // No api key? There is no need to continue
+		// No api key? There is no need to continue
 		if($key == "") 
 		{
 			throw new GaintBombException("You need to provide an API key. Get your API Key at http://api.giantbomb.com");
@@ -125,7 +125,7 @@ class GaintBomb {
 }
 
 /**
-* Define a custom exception class for api
+* Define a custom exception class for api wrapper
 **/
 class GaintBombException extends Exception {
 
