@@ -104,7 +104,7 @@ class GaintBomb {
 		$formatted_resp = $this->format_result($resp["data"]);
 		
 		// Does the result returned by api have any errors?
-		if($formatted_resp["error"] != "" || strtoupper($formatted_resp["error"]) != "OK")
+		if($formatted_resp["error"] != "" && strtoupper($formatted_resp["error"]) != "OK")
 		{
 			throw new GaintBombException("Following error encountered : " . $formatted_resp["error"]);
 		}
@@ -127,8 +127,8 @@ class GaintBomb {
 /**
 * Define a custom exception class for api
 **/
-class GaintBombException extends Exception
-{
+class GaintBombException extends Exception {
+
     // Redefine the exception so message isn't optional
     public function __construct($message, $code = 0, Exception $previous = null) 
 	{
