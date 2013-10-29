@@ -1,4 +1,4 @@
-PHP wrapper for Giantbomb API!
+PHP wrapper for Giantbomb API
 ==============================
 
 Get your API Key at http://api.giantbomb.com
