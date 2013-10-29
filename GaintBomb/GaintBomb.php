@@ -92,7 +92,7 @@ class GaintBomb {
 			throw new GaintBombException("You need to provide a game id to get information about a particular game");
 		} 
 		$resp = $this->get_url("http://www.giantbomb.com/api/game/" . $game_id . "/?api_key=" . $this->api_key . "&format=" . $this->resp_type);
-		if(!$resp)
+		if(!$resp || !$resp["data"])
 		{
 			throw new GaintBombException("Couldn't get information about the game");
 		}
@@ -108,7 +108,7 @@ class GaintBomb {
 		{
 			throw new GaintBombException("Following error encountered : " . $formatted_resp["error"]);
 		}
-		var_dump($formatted_resp);
+		return $formatted_resp;
 	}
 	
 	private function format_result($res)
