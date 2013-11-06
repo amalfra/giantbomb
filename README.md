@@ -13,6 +13,9 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 **Currently Available Methods**
 * game(game_id)
 
+
+*All the methods return an object*
+
 UNDER MIT LICENSE
 =================
 
