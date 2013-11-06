@@ -14,7 +14,7 @@ class GiantBomb {
 	* The api key
 	*
 	* @access private 
-	* @type string
+	* @type   string
 	**/
 	private $api_key = "";
 	
@@ -22,9 +22,18 @@ class GiantBomb {
 	* The api response type : json/xml
 	*
 	* @access private 
-	* @type string
+	* @type   string
 	**/
 	private $resp_type = "";
+	
+	/**
+	* A variable to hold the formatted result of  
+	* last api request
+	*
+	* @access public
+	* @type   array
+	**/
+	public $result = array();
 	
 	/**
 	* Constructor
@@ -39,7 +48,7 @@ class GiantBomb {
 		// Set the api key
 		$this->api_key = $key;
 		
-		// Now set the api response type
+		// Now set the api response type, Default to json
 		if($resp != "" && in_array($resp, array("json", "xml"))) 
 		{
 			$this->resp_type = $resp;
@@ -56,7 +65,7 @@ class GiantBomb {
 	* @access private 
 	* @return array
 	*
-	* @param url string
+	* @param  url string
 	**/
 	private function get_url($url)
 	{
@@ -82,7 +91,7 @@ class GiantBomb {
 	* @access public 
 	* @return array
 	*
-	* @param game_id string
+	* @param  game_id string
 	**/
 	public function game($game_id = "")
 	{
@@ -104,7 +113,7 @@ class GiantBomb {
 		$formatted_resp = $this->format_result($resp["data"]);
 		
 		// Does the result returned by api have any errors?
-		if($formatted_resp["error"] != "" && strtoupper($formatted_resp["error"]) != "OK")
+		if($formatted_resp->error != "" && strtoupper($formatted_resp->error) != "OK")
 		{
 			throw new GiantBombException("Following error encountered : " . $formatted_resp["error"]);
 		}
@@ -115,12 +124,13 @@ class GiantBomb {
 	{
 		if($this->resp_type == "json")
 		{
-			return (array)json_decode($res);
+			$this->result = json_decode($res);
 		}
 		else
 		{
-			return (array)(simplexml_load_string($res));
+			$this->result = simplexml_load_string($res);
 		}
+		return $this->result;
 	}
 }
 
