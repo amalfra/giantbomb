@@ -6,7 +6,7 @@ Get your API Key at http://api.giantbomb.com
 Basic usage:
 ```php
 include 'GiantBomb/GiantBomb.php';
-gb_obj = new GiantBomb('YOUR_KEY');
+$gb_obj = new GiantBomb('YOUR_KEY');
 ```
 
 UNDER MIT LICENSE
