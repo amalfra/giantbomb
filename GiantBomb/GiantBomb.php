@@ -4,10 +4,12 @@
  * make interactions with GiantBomb api easier.
  *
  * @package    GiantBomb api PHP wrapper
- * @version    0.1dev
+ * @version    0.2
  * @author     Amal Francis
+ * @author     Koroban
  * @license    MIT License
  */
+
 class GiantBomb {
 
     /**
@@ -161,11 +163,14 @@ class GiantBomb {
     }
 
     /**
-     * Get information about given object type
+     * Get list of objects by given filters
      *
-     *
-     * @param  $id         string  ID to request
-     * @param  $field_list array   list of fields to response
+     * @param $filter     array    filter by given values - no "," accepted
+     * @param $limit      integer  limit result count by given limit
+     * @param $offset     integer  offset of results
+     * @param $platform   integer  ID of platform to limit
+     * @param $sort       array    list of keys to sort, format key => asc/desc,
+     * @param $field_list array    list of field to result
      *
      * @return array response
      */
@@ -304,7 +309,11 @@ class GiantBombException extends Exception {
         parent::__construct($message, $code, $previous);
     }
 
-    // custom string representation of object
+    /**
+     * convert exception to string
+     *
+     * @return string
+     */
     public function __toString() {
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }

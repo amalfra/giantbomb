@@ -12,7 +12,11 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 
 **Currently Available Methods**
 * game(game_id)
-
+* games
+* review
+* game_rating
+* company
+* character
 
 *All the methods return an object*
 
