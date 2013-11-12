@@ -41,6 +41,7 @@ class GiantBomb {
      * api endpoint
      * prefix for all API cals
      *
+	 * @access protected
      * @type   string
      */
     protected $endpoint = 'http://www.giantbomb.com/api/';
@@ -48,6 +49,7 @@ class GiantBomb {
     /**
      * curl instance
      *
+	 * @access protected
      * @type handle
      */
     protected $ch = null;
@@ -60,7 +62,8 @@ class GiantBomb {
      *
      * @return void
      */
-    function __construct($key, $resp = "json") {
+    function __construct($key, $resp = "json") 
+	{
         // Set the api key
         $this->api_key = $key;
         
@@ -85,7 +88,8 @@ class GiantBomb {
      *
      * @return void
      */
-    function __destruct() {
+    function __destruct() 
+	{
         // Close request to clear up some resources
         if (!is_null($this->ch)) {
             curl_close($this->ch);
@@ -100,7 +104,8 @@ class GiantBomb {
      *
      * @return array response of API
      */
-    private function call($module, $params = array()) {
+    private function call($module, $params = array()) 
+	{
         // set api data
         $params['api_key'] = $this->api_key;
         $params['format']  = $this->resp_type;
@@ -134,9 +139,11 @@ class GiantBomb {
      *
      * @return string combined filter string
      */
-    private function format_filter($filters) {
+    private function format_filter($filters) 
+	{
         $filters_merged = array();
-        foreach ($filters as $ky => $vl) {
+        foreach ($filters as $ky => $vl) 
+		{
             $filters_merged[] = $ky . ':' . $vl;
         }
 
@@ -151,7 +158,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function get_object($type, $id, $field_list = array()) {
+    public function get_object($type, $id, $field_list = array()) 
+	{
         $resp = $this->call($type . '/' . $id . '/', array('field_list' => implode(',', $field_list)));
 
         // No game with given game id found
@@ -174,7 +182,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function get_objects($type, $filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(), $field_list = array()) {
+    public function get_objects($type, $filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(), $field_list = array()) 
+	{
         $resp = $this->call($type . '/', array(
             'field_list' => implode(',', $field_list),
             'limit' => $limit,
@@ -195,7 +204,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function game($id, $field_list = array()) {
+    public function game($id, $field_list = array()) 
+	{
         return $this->get_object('game', $id, $field_list);
     }
    
@@ -211,7 +221,8 @@ class GiantBomb {
      *
      * @return array list of games
      */
-    public function games($filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(), $field_list = array()) {
+    public function games($filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(), $field_list = array()) 
+	{
         return $this->get_objects('games', $filter, $limit, $offset, $platform, $sort, $field_list);
     }
 
@@ -223,7 +234,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function review($id, $field_list = array()) {
+    public function review($id, $field_list = array()) 
+	{
         return $this->get_object('review', $id, $field_list);
     }
 
@@ -235,7 +247,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function game_rating($id, $field_list = array()) {
+    public function game_rating($id, $field_list = array()) 
+	{
         return $this->get_object('game_rating', $id, $field_list);
     }
 
@@ -247,7 +260,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function company($id, $field_list = array()) {
+    public function company($id, $field_list = array()) 
+	{
         return $this->get_object('company', $id, $field_list);
     }
 
@@ -259,7 +273,8 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function character($id, $field_list = array()) {
+    public function character($id, $field_list = array()) 
+	{
         return $this->get_object('character', $id, $field_list);
     }
 
@@ -270,7 +285,8 @@ class GiantBomb {
      *
      * @return mixed parsed version of input string
      */
-    private function parse_result($data) {
+    private function parse_result($data) 
+	{
         try {
             if ($this->resp_type == "json") {
                 $result = @json_decode($data);
@@ -281,8 +297,8 @@ class GiantBomb {
             throw new GiantBombException("Parse error occoured", null, $e);
         }
 
-        if (empty($result) || !empty($result->error) && strtoupper($result->error) != "OK") {
-            var_dump($data);
+        if (empty($result) || !empty($result->error) && strtoupper($result->error) != "OK") 
+		{
             throw new GiantBombException("Following error encountered: " . $result["error"]);
         }
 
@@ -304,7 +320,8 @@ class GiantBombException extends Exception {
      *
      * @return void
      */
-    public function __construct($message, $code = 0, Exception $previous = null)  {
+    public function __construct($message, $code = 0, Exception $previous = null)  
+	{
         // make sure everything is assigned properly
         parent::__construct($message, $code, $previous);
     }
@@ -314,7 +331,8 @@ class GiantBombException extends Exception {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString() 
+	{
         return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
     }
 }
