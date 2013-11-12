@@ -11,12 +11,12 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 ```
 
 **Currently Available Methods**
-* game(game_id)
-* games
-* review
-* game_rating
-* company
-* character
+* game(game_id, field_list)
+* games(filter, limit, offset, platform, sort, field_list)
+* review(review_id, field_list)
+* game_rating(rating_id, field_list)
+* company(company_id, field_list)
+* character(character_id, field_list)
 
 *All the methods return an object*
 

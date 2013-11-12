@@ -237,9 +237,9 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function review($id, $field_list = array()) 
+    public function review($review_id, $field_list = array()) 
 	{
-        return $this->get_object('review', $id, $field_list);
+        return $this->get_object('review', $review_id, $field_list);
     }
 
     /**
@@ -250,9 +250,9 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function game_rating($id, $field_list = array()) 
+    public function game_rating($rating_id, $field_list = array()) 
 	{
-        return $this->get_object('game_rating', $id, $field_list);
+        return $this->get_object('game_rating', $rating_id, $field_list);
     }
 
     /**
@@ -263,7 +263,7 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function company($id, $field_list = array()) 
+    public function company($company_id, $field_list = array()) 
 	{
         return $this->get_object('company', $id, $field_list);
     }
@@ -276,9 +276,9 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function character($id, $field_list = array()) 
+    public function character($character_id, $field_list = array()) 
 	{
-        return $this->get_object('character', $id, $field_list);
+        return $this->get_object('character', $character_id, $field_list);
     }
 
     /**
