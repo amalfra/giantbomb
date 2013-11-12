@@ -70,7 +70,7 @@ class GiantBomb {
         // Now set the api response type, Default to json
         $this->resp_type = $resp;
 
-        // init new instance of curl
+        // Init new instance of curl
         $this->ch = curl_init();
 
         // set default options for curl
@@ -97,7 +97,7 @@ class GiantBomb {
     }
 
     /**
-     * send call to API
+     * Send call to API
      *
      * @param $module string name of url suffix
      * @param $params array  get parameters to send to API
@@ -118,14 +118,16 @@ class GiantBomb {
 
         // Send the request & save response to $resp
         $resp["data"] = curl_exec($this->ch);
-        if (curl_errno($this->ch)) {
+        if (curl_errno($this->ch)) 
+		{
             throw new GiantBombException('API call failed: ' . curl_error($this->ch));
         }
 
         // save http response code
         $resp["httpCode"] = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 
-        if (!$resp || !$resp["data"]) {
+        if (!$resp || !$resp["data"]) 
+		{
             throw new GiantBombException("Couldn't get information from API");
         }
 
@@ -133,13 +135,13 @@ class GiantBomb {
     }
 
     /**
-     * format filter array to string
+     * Format filter array to string
      *
      * @param $filters array list of filters
      *
      * @return string combined filter string
      */
-    private function format_filter($filters) 
+    private function format_filter($filters = array()) 
 	{
         $filters_merged = array();
         foreach ($filters as $ky => $vl) 
@@ -163,7 +165,8 @@ class GiantBomb {
         $resp = $this->call($type . '/' . $id . '/', array('field_list' => implode(',', $field_list)));
 
         // No game with given game id found
-        if ($resp["httpCode"] == 404) {
+        if ($resp["httpCode"] == 404) 
+		{
             throw new GiantBombException('Couldn\'t find ' . $type . ' with game id "' . $id . '"');
         }
 
@@ -185,12 +188,12 @@ class GiantBomb {
     public function get_objects($type, $filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(), $field_list = array()) 
 	{
         $resp = $this->call($type . '/', array(
-            'field_list' => implode(',', $field_list),
-            'limit' => $limit,
-            'offset' => $offset,
-            'platforms' => $platform,
-            'sort' => $this->format_filter($sort),
-            'filter' => $this->format_filter($filter)
+            'field_list'	=> implode(',', $field_list),
+            'limit'			=> $limit,
+            'offset' 		=> $offset,
+            'platforms' 	=> $platform,
+            'sort' 			=> $this->format_filter($sort),
+            'filter' 		=> $this->format_filter($filter)
         ));
 
         return $this->parse_result($resp["data"]);
@@ -210,7 +213,7 @@ class GiantBomb {
     }
    
     /**
-     * list games by filters
+     * List games by filters
      *
      * @param $filter     array    filter by given values - no "," accepted
      * @param $limit      integer  limit result count by given limit
@@ -279,21 +282,27 @@ class GiantBomb {
     }
 
     /**
-     * return parsed result of api response
+     * Return parsed result of api response
      *
      * @param $data string result of API
      *
-     * @return mixed parsed version of input string
+     * @return mixed parsed version of input string(object)
      */
     private function parse_result($data) 
 	{
-        try {
-            if ($this->resp_type == "json") {
+        try 
+		{
+            if ($this->resp_type == "json") 
+			{
                 $result = @json_decode($data);
-            } else {
+            } 
+			else 
+			{
                 $result = @simplexml_load_string($data);
             }
-        } catch (Exception $e) {
+        } 
+		catch (Exception $e) 
+		{
             throw new GiantBombException("Parse error occoured", null, $e);
         }
 
