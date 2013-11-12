@@ -20,7 +20,7 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 
 *All the methods return an object*
 
-Checlout the wiki for more help :- https://github.com/amalfra/GiantBomb/wiki
+Checkout the wiki for more help :- https://github.com/amalfra/GiantBomb/wiki
 
 UNDER MIT LICENSE
 =================
