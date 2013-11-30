@@ -1,5 +1,5 @@
 {
-    "name": "GiantBomb/GiantBomb",
+    "name": "giantbomb/giantbomb",
     "description": "A PHP wrapper for GiantBomb API",
     "keywords": ["php", "api", "wrapper", "giantbomb"],
     "homepage": "https://github.com/amalfra/GiantBomb",
