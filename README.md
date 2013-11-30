@@ -22,6 +22,8 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 
 Checkout the wiki for more help :- https://github.com/amalfra/GiantBomb/wiki
 
+[![Build Status](https://travis-ci.org/gaintbomb/gaintbomb.png?branch=master)](http://travis-ci.org/gaintbomb/gaintbomb)
+
 UNDER MIT LICENSE
 =================
 
