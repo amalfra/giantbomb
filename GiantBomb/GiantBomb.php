@@ -286,6 +286,7 @@ class GiantBomb {
      *
      * @param  $query      string  keyword to search
      * @param  $field_list array   list of fields to response
+	 * @param $limit       integer  limit result count by given limit
      *
      * @return array response
      */
@@ -300,6 +301,26 @@ class GiantBomb {
             'page' 			=> $page,
             'query' 		=> $query,
 			'resources'		=> implode(',', $resources)
+        ));
+
+        return $this->parse_result($resp['data']);
+    }
+	
+	/**
+     * List genres 
+     *
+	 * @param $field_list array    list of field to result
+     * @param $limit      integer  limit result count by given limit
+     * @param $offset     integer  offset of results
+     *
+     * @return array list of games
+     */
+    public function genres($field_list = array(), $limit = 100, $offset = 0) 
+	{
+        $resp = $this->call('genres/', array(
+            'field_list'	=> implode(',', $field_list),
+            'limit'			=> $limit,
+            'offset' 		=> $offset 
         ));
 
         return $this->parse_result($resp['data']);

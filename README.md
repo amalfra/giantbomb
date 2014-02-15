@@ -18,6 +18,7 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 * company(company_id, field_list)
 * character(character_id, field_list)
 * search(query, field_list, limit, page, resources)
+* genres(field_list, limit, offset)
 
 *All the methods return an object*
 
