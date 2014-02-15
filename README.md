@@ -19,6 +19,7 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 * character(character_id, field_list)
 * search(query, field_list, limit, page, resources)
 * genres(field_list, limit, offset)
+* platforms(field_list, limit, offset, filter, sort)
 
 *All the methods return an object*
 

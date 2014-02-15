@@ -325,6 +325,30 @@ class GiantBomb {
 
         return $this->parse_result($resp['data']);
     }
+		
+	/**
+     * List platforms by filter
+     *
+	 * @param $field_list array    list of field to result
+     * @param $limit      integer  limit result count by given limit
+     * @param $offset     integer  offset of results
+	 * @param $filter     array    filter by given values - no "," accepted
+     * @param $sort       array    list of keys to sort, format key => asc/desc,
+     *
+     * @return array list of games
+     */
+    public function platforms($field_list = array(), $limit = 100, $offset = 0, $filter = array(), $sort = array()) 
+	{		
+		$resp = $this->call('platforms/', array(
+            'field_list'	=> implode(',', $field_list),
+            'limit'			=> $limit,
+            'offset' 		=> $offset,
+            'sort' 			=> $this->format_filter($sort),
+            'filter' 		=> $this->format_filter($filter)
+        ));
+
+        return $this->parse_result($resp["data"]);
+    }
 	
     /**
      * Return parsed result of api response
