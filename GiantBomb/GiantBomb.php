@@ -1,10 +1,10 @@
-﻿<?php
+<?php
 /**
  * GiantBomb PHP wrapper is a simple class written in PHP to
  * make interactions with GiantBomb api easier.
  *
  * @package    GiantBomb api PHP wrapper
- * @version    0.2
+ * @version    0.3
  * @author     Amal Francis
  * @author     Koroban
  * @license    MIT License
@@ -281,6 +281,30 @@ class GiantBomb {
         return $this->get_object('character', $character_id, $field_list);
     }
 
+	/**
+     * Perform a search with given keyword
+     *
+     * @param  $query      string  keyword to search
+     * @param  $field_list array   list of fields to response
+     *
+     * @return array response
+     */
+    public function search($query, $field_list = array(), $limit = 100, $page = 1, $resources = array()) 
+	{
+		if (!is_array($field_list)) $field_list = (array)$field_list;
+		if (!is_array($resources)) $resources = (array)$resources;
+		
+        $resp = $this->call('search/', array(
+            'field_list'	=> implode(',', $field_list),
+            'limit'			=> $limit,
+            'page' 			=> $page,
+            'query' 		=> $query,
+			'resources'		=> implode(',', $resources)
+        ));
+
+        return $this->parse_result($resp['data']);
+    }
+	
     /**
      * Return parsed result of api response
      *

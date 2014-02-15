@@ -17,6 +17,7 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 * game_rating(rating_id, field_list)
 * company(company_id, field_list)
 * character(character_id, field_list)
+* search(query, field_list, limit, page, resources)
 
 *All the methods return an object*
 
