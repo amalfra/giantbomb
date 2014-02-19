@@ -4,7 +4,7 @@
  * make interactions with GiantBomb api easier.
  *
  * @package    GiantBomb api PHP wrapper
- * @version    0.3
+ * @version    0.4
  * @author     Amal Francis
  * @author     Koroban
  * @license    MIT License
