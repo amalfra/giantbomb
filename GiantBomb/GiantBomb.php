@@ -377,7 +377,7 @@ class GiantBomb {
 
         if (empty($result) || !empty($result->error) && strtoupper($result->error) != "OK") 
 		{
-            throw new GiantBombException("Following error encountered: " . $result["error"]);
+            throw new GiantBombException("Following error encountered: " . $result->error);
         }
 
         return $result;
