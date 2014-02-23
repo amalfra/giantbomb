@@ -290,7 +290,7 @@ class GiantBomb {
      *
      * @return array response
      */
-    public function search($query, $field_list = array(), $limit = 100, $page = 1, $resources = array()) 
+    public function search($query, $field_list = array(), $limit = 100, $page = 0, $resources = array()) 
 	{
 		if (!is_array($field_list)) $field_list = (array)$field_list;
 		if (!is_array($resources)) $resources = (array)$resources;
