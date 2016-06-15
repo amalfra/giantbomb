@@ -1,7 +1,7 @@
 PHP wrapper for Giantbomb API
 ==============================
 
-Get your API Key at http://api.giantbomb.com
+> Get your API Key at http://api.giantbomb.com
 
 
 **Basic usage**
@@ -25,6 +25,12 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 
 Checkout the wiki for more help :- https://github.com/amalfra/GiantBomb/wiki
 
+## Development
+
+Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/mongoose-webhooks/issues).
+
+You can contribute changes by forking the project and submitting a pull request. Feel free to contribute :heart_eyes:
+
 UNDER MIT LICENSE
 =================
 
@@ -33,8 +39,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/amalfra/giantbomb/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
