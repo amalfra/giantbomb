@@ -1,5 +1,6 @@
 PHP wrapper for Giantbomb API
 ==============================
+[![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
 
 > Get your API Key at http://api.giantbomb.com
 
