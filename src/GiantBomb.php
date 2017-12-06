@@ -2,6 +2,8 @@
 
 namespace GiantBomb;
 
+use Doctrine\Common\Cache\CacheProvider;
+
 /**
  * GiantBomb PHP wrapper is a simple class written in PHP to
  * make interactions with GiantBomb api easier.
@@ -17,7 +19,6 @@ class GiantBomb {
   /**
    * The api key
    *
-   * @access private 
    * @type   string
    */
   private $api_key = '';
@@ -25,16 +26,21 @@ class GiantBomb {
   /**
    * The api response type : json/xml
    *
-   * @access private 
    * @type   string
    */
   private $resp_type = 'json';
   
   /**
+   * The CacheProvider instance configured
+   *
+   * @type   Doctrine\Common\Cache\CacheProvider
+   */
+  private $cache;
+
+  /**
    * A variable to hold the formatted result of  
    * last api request
    *
-   * @access public
    * @type   array
    */
   public $result = array();
@@ -43,7 +49,6 @@ class GiantBomb {
    * api endpoint
    * prefix for all API cals
    *
- * @access protected
    * @type   string
    */
   protected $endpoint = 'http://www.giantbomb.com/api/';
@@ -51,7 +56,6 @@ class GiantBomb {
   /**
    * curl instance
    *
-   * @access protected
    * @type handle
    */
   protected $ch = null;
@@ -157,40 +161,53 @@ class GiantBomb {
    * @return array response
    */
   public function get_object($type, $id, $field_list = array()) {
-    $resp = $this->call($type . '/' . $id . '/', array('field_list' => implode(',', $field_list)));
+    if ($this->cache) {
+      $signature = $this->createSignature($type . '/' . $id, $field_list);
+      if ($this->cache->contains($signature)) {
+        return $this->cache->fetch($signature);
+      }
+    }
 
-    // No game with given game id found
+    $resp = $this->call($type . '/' . $id, array('field_list' => implode(',', $field_list)));
+
+    // No game/review/company/character with given id found
     if ($resp['httpCode'] == 404) {
       throw new GiantBombException("Couldn't find " . $type . ' with ' . $type . ' id "' . $id . '"');
     }
 
-    return $this->parse_result($resp['data']);
+    $result = $this->parse_result($resp['data']);
+
+    if ($this->cache) {    
+      $this->cache->save($signature, $result);
+    }
+
+    return $result;
   }
 
   /**
    * Get list of objects by given filters
    *
-   * @param $filter     array    filter by given values - no "," accepted
-   * @param $limit      integer  limit result count by given limit
-   * @param $offset     integer  offset of results
-   * @param $platform   integer  ID of platform to limit
-   * @param $sort       array    list of keys to sort, format key => asc/desc,
-   * @param $field_list array    list of field to result
+   * @param $type           string  type of objects to fetch
+   * @param $param_options  array   an associative array of query params
    *
    * @return array response
    */
-  public function get_objects($type, $filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(),
-      $field_list = array()) {
-    $resp = $this->call($type . '/', array(
-      'field_list'	=> implode(',', $field_list),
-      'limit'			  => $limit,
-      'offset' 		  => $offset,
-      'platforms' 	=> $platform,
-      'sort' 			  => $this->format_filter($sort),
-      'filter' 		  => $this->format_filter($filter)
-    ));
+  public function get_objects($type, $param_options = array()) {
+    if ($this->cache) {
+      $signature = $this->createSignature($type . '/', $param_options);
+      if ($this->cache->contains($signature)) {
+        return $this->cache->fetch($signature);
+      }
+    }
 
-    return $this->parse_result($resp['data']);
+    $resp = $this->call($type, $param_options);
+    $result = $this->parse_result($resp['data']);
+
+    if ($this->cache) {    
+      $this->cache->save($signature, $result);
+    }
+
+    return $result;
   }
 
   /**
@@ -219,7 +236,16 @@ class GiantBomb {
    */
   public function games($filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(),
     $field_list = array()) {
-    return $this->get_objects('games', $filter, $limit, $offset, $platform, $sort, $field_list);
+    $params = array(
+      'field_list'	=> implode(',', $field_list),
+      'limit'			  => $limit,
+      'offset' 		  => $offset,
+      'platforms' 	=> $platform,
+      'sort' 			  => $this->format_filter($sort),
+      'filter' 		  => $this->format_filter($filter)
+    );
+
+    return $this->get_objects('games', $params);
   }
 
   /**
@@ -275,27 +301,22 @@ class GiantBomb {
    *
    * @param  $query      string  keyword to search
    * @param  $field_list array   list of fields to response
-   * @param $limit       integer  limit result count by given limit
+   * @param  $limit      integer limit result count by given limit
+   * @param  $page       integer page number of search results
+   * @param  $resources  array   list of resources to filter results
    *
    * @return array response
    */
   public function search($query, $field_list = array(), $limit = 100, $page = 0, $resources = array()) {
-    if (!is_array($field_list)) {
-      $field_list = (array)$field_list;
-    }
-    if (!is_array($resources)) {
-      $resources = (array)$resources;
-    }
-  
-    $resp = $this->call('search/', array(
+    $params = array(
       'field_list'	=> implode(',', $field_list),
       'limit'			  => $limit,
-      'page' 			  => $page,
-      'query' 		  => $query,
-      'resources'		=> implode(',', $resources)
-    ));
+      'page' 		    => $page,
+      'query' 	    => $query,
+      'resources'   => implode(',', $resources)
+    );
 
-    return $this->parse_result($resp['data']);
+    return $this->get_objects('search', $params);
   }
 
   /**
@@ -308,13 +329,13 @@ class GiantBomb {
    * @return array list of games
    */
   public function genres($field_list = array(), $limit = 100, $offset = 0) {
-    $resp = $this->call('genres/', array(
+    $params = array(
       'field_list'	=> implode(',', $field_list),
       'limit'			  => $limit,
-      'offset' 		  => $offset 
-    ));
+      'offset' 		  => $offset
+    );
 
-    return $this->parse_result($resp['data']);
+    return $this->get_objects('genres', $params);
   }
 
   /**
@@ -328,16 +349,16 @@ class GiantBomb {
    *
    * @return array list of games
    */
-  public function platforms($field_list = array(), $limit = 100, $offset = 0, $filter = array(), $sort = array()) {		
-    $resp = $this->call('platforms/', array(
+  public function platforms($field_list = array(), $limit = 100, $offset = 0, $filter = array(), $sort = array()) {
+    $params = array(
       'field_list'	=> implode(',', $field_list),
       'limit'			  => $limit,
       'offset' 		  => $offset,
       'sort' 			  => $this->format_filter($sort),
       'filter' 		  => $this->format_filter($filter)
-    ));
+    );
 
-    return $this->parse_result($resp['data']);
+    return $this->get_objects('platforms', $params);
   }
 
   /**
@@ -365,5 +386,19 @@ class GiantBomb {
     }
 
     return $result;
+  }
+
+  /**
+   * Creates a signature for the given request
+   *
+   * @param string $url     string name of url suffix
+   * @param array  $params  array  get parameters to send to API
+   *
+   * @return string
+   */
+  private function createSignature($url, $params) {
+    $url = $url . '?' . http_build_query($params);
+
+    return 'giantbomb-'.substr(sha1($url), 0, 7);
   }
 }
