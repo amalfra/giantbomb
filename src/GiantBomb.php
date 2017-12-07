@@ -14,7 +14,6 @@ use Doctrine\Common\Cache\CacheProvider;
  * @author     Koroban
  * @license    MIT License
  */
-
 class GiantBomb {
   /**
    * The api key
@@ -102,6 +101,19 @@ class GiantBomb {
   }
 
   /**
+   * Set type of cache to use
+   *
+   * @param $provider  Doctrine\Common\Cache\CacheProvider
+   *
+   * @return array response of API
+   */
+  public function setCacheProvider($provider = null) {
+    if ($provider) {
+      $this->cache = $provider;
+    }
+  }
+
+  /**
    * Send call to API
    *
    * @param $module string name of url suffix
@@ -177,7 +189,7 @@ class GiantBomb {
 
     $result = $this->parse_result($resp['data']);
 
-    if ($this->cache) {    
+    if ($this->cache) {
       $this->cache->save($signature, $result);
     }
 
