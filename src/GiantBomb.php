@@ -272,12 +272,12 @@ class GiantBomb {
   public function games($filter = array(), $limit = 100, $offset = 0, $platform = null, $sort = array(),
     $field_list = array()) {
     $params = array(
-      'field_list'	=> implode(',', $field_list),
-      'limit'			  => $limit,
-      'offset' 		  => $offset,
-      'platforms' 	=> $platform,
-      'sort' 			  => $this->format_filter($sort),
-      'filter' 		  => $this->format_filter($filter)
+      'field_list'  => implode(',', $field_list),
+      'limit'       => $limit,
+      'offset'      => $offset,
+      'platforms'   => $platform,
+      'sort'        => $this->format_filter($sort),
+      'filter'      => $this->format_filter($filter)
     );
 
     return $this->get_objects('games', $params);
@@ -344,10 +344,10 @@ class GiantBomb {
    */
   public function search($query, $field_list = array(), $limit = 100, $page = 0, $resources = array()) {
     $params = array(
-      'field_list'	=> implode(',', $field_list),
-      'limit'			  => $limit,
-      'page' 		    => $page,
-      'query' 	    => $query,
+      'field_list'  => implode(',', $field_list),
+      'limit'       => $limit,
+      'page'        => $page,
+      'query'       => $query,
       'resources'   => implode(',', $resources)
     );
 
@@ -365,9 +365,9 @@ class GiantBomb {
    */
   public function genres($field_list = array(), $limit = 100, $offset = 0) {
     $params = array(
-      'field_list'	=> implode(',', $field_list),
-      'limit'			  => $limit,
-      'offset' 		  => $offset
+      'field_list'  => implode(',', $field_list),
+      'limit'       => $limit,
+      'offset'      => $offset
     );
 
     return $this->get_objects('genres', $params);
@@ -386,11 +386,11 @@ class GiantBomb {
    */
   public function platforms($field_list = array(), $limit = 100, $offset = 0, $filter = array(), $sort = array()) {
     $params = array(
-      'field_list'	=> implode(',', $field_list),
-      'limit'			  => $limit,
-      'offset' 		  => $offset,
-      'sort' 			  => $this->format_filter($sort),
-      'filter' 		  => $this->format_filter($filter)
+      'field_list'  => implode(',', $field_list),
+      'limit'       => $limit,
+      'offset'      => $offset,
+      'sort'        => $this->format_filter($sort),
+      'filter'      => $this->format_filter($filter)
     );
 
     return $this->get_objects('platforms', $params);
