@@ -3,6 +3,9 @@
 namespace GiantBomb;
 
 use Doctrine\Common\Cache\CacheProvider;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\RedisCache;
+use Redis;
 
 /**
  * GiantBomb PHP wrapper is a simple class written in PHP to
@@ -103,13 +106,33 @@ class GiantBomb {
   /**
    * Set type of cache to use
    *
-   * @param $provider  Doctrine\Common\Cache\CacheProvider
+   * @param $provider string supported values: inmemory, redis
+   * @param $config   optional config required for cache type, eg: connection details for redis
    *
    * @return array response of API
    */
-  public function setCacheProvider($provider = null) {
+  public function setCacheProvider($provider = null, $config = array()) {
     if ($provider) {
-      $this->cache = $provider;
+      switch ($provider) {
+        case 'inmemory':
+          $this->cache = new ArrayCache();
+          break;
+        case 'redis':
+          if (!isset($config['host'])) {
+            throw new GiantBombException('host config not specified');
+          }
+          if (!isset($config['port'])) {
+            throw new GiantBombException('port config not specified');
+          }
+          $redis = new Redis();
+          $redis->connect($config['host'], $config['port']);
+
+          $this->cache = new RedisCache();
+          $this->cache->setRedis($redis);
+          break;
+        default:
+          throw new GiantBombException('Unsupported cache type: ' . $provider);
+      };
     }
   }
 

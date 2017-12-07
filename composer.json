@@ -17,7 +17,8 @@
   ],
   "require": {
     "php": "^7.0.0",
-    "doctrine/cache": "^1.6"
+    "doctrine/cache": "^1.6",
+    "ext-redis": "*"
   },
   "autoload": {
     "psr-4": {
