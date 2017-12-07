@@ -2,16 +2,43 @@ PHP wrapper for Giantbomb API
 ==============================
 [![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
 
+A library for easy interaction with Giantbomb API. Features are:
+* PSR-4 autoloading support
+* Caching support
+
 > Get your API Key at http://api.giantbomb.com
 
+## Requirements
+* PHP >= 7.0
+* PHP Redis extension
 
-**Basic usage**
+## Installation
+via Composer
+```sh
+$ composer require amalfra/giantbomb
+```
+This will create a vendor directory (if you dont already have one) and set up the autoloading classmap.
+
+## Usage
+Once everything is installed, you should be able to load the composer autoloader in your code.
+
+You can load the wrapper classes using namespace as:
+
 ```php
-include 'GiantBomb/GiantBomb.php';
+require __DIR__ . '/vendor/autoload.php';
+
+use GiantBomb\GiantBomb;
+```
+
+Now create a new object
+
+```php
 $gb_obj = new GiantBomb('YOUR_KEY');
 ```
 
-**Currently Available Methods**
+Now the available API methods can be called using the instance. All the result from API will be returned as an object. If any status code other than 200 is returned an exception would be thrown.
+
+### Currently Available Methods
 * game(game_id, field_list)
 * games(filter, limit, offset, platform, sort, field_list)
 * review(review_id, field_list)
@@ -22,13 +49,31 @@ $gb_obj = new GiantBomb('YOUR_KEY');
 * genres(field_list, limit, offset)
 * platforms(field_list, limit, offset, filter, sort)
 
-*All the methods return an object*
+### Cache
+You can configure caching to prevent hitting API if same queries are made again. Currently supported caching methods are:
+* inmemory: cache will be stored in memory array. This won't be persisted after your script exits.
+* redis: cache will be stored in redis store which can be configured.
 
-Checkout the wiki for more help :- https://github.com/amalfra/GiantBomb/wiki
+Cache can be configured using ```setCacheProvider``` method of GiantBomb instance. If it's not configured caching will be disabled and API will always be hit each time a method is called. ```setCacheProvider``` method accepts two parameter: 
+1. [required] cache type eg: inmemory, redis etc
+2. [optional] an associative array in which additional configuration details required for setting up the cache method can be given eg: redis server host and port values
+
+#### using inmemory cache method
+This method does not need any additional configuration option than just activating by calling ```setCacheProvider``` method with ```inmemory``` as first parameter.
+eg:
+```php
+$gb_obj->setCacheProvider('inmemory');
+```
+#### using redis cache method
+This method can be activated by calling ```setCacheProvider``` method with ```redis``` as first parameter. You will also need to specify redis server host and port as second parameter.
+eg:
+```php
+$gb_obj->setCacheProvider('redis', array('host' => 'localhost', 'port' => 6379));
+```
 
 ## Development
 
-Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/mongoose-webhooks/issues).
+Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/GiantBomb/issues).
 
 You can contribute changes by forking the project and submitting a pull request. Feel free to contribute :heart_eyes:
 
