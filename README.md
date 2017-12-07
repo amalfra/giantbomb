@@ -15,7 +15,7 @@ A library for easy interaction with Giantbomb API. Features are:
 ## Installation
 via Composer
 ```sh
-$ composer require amalfra/giantbomb
+$ composer require giantbomb/giantbomb
 ```
 This will create a vendor directory (if you dont already have one) and set up the autoloading classmap.
 
