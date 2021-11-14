@@ -1,8 +1,8 @@
 {
-  "name": "giantbomb/giantbomb",
+  "name": "amalfra/giantbomb",
   "description": "A PHP wrapper for GiantBomb API",
   "keywords": ["php", "api", "wrapper", "giantbomb"],
-  "homepage": "http://www.giantbomb.com/api/",
+  "homepage": "http://www.giantbomb.com/api",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -16,13 +16,13 @@
     }
   ],
   "require": {
-    "php": "^7.0.0",
-    "doctrine/cache": "^1.6",
+    "php": ">=7.4.0",
+    "doctrine/cache": "^2.1",
     "ext-redis": "*"
   },
   "autoload": {
     "psr-4": {
-      "GiantBomb\\": "src/"
+      "Amalfra\\GiantBomb\\": "src/"
     }
   }
 }
