@@ -1,4 +1,4 @@
-PHP wrapper for Giantbomb API
+Giantbomb API
 ==============================
 [![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
 
@@ -9,13 +9,15 @@ A library for easy interaction with Giantbomb API. Features are:
 > Get your API Key at http://api.giantbomb.com
 
 ## Requirements
-* PHP >= 7.0
-* PHP Redis extension
+* PHP >= 7.4
+* PHP Redis extension. It can be installed using following command:
+```sh
+pecl install redis
+```
 
 ## Installation
-via Composer
 ```sh
-$ composer require giantbomb/giantbomb
+composer require amalfra/giantbomb
 ```
 This will create a vendor directory (if you dont already have one) and set up the autoloading classmap.
 
@@ -27,7 +29,7 @@ You can load the wrapper classes using namespace as:
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use GiantBomb\GiantBomb;
+use \Amalfra\GiantBomb;
 ```
 
 Now create a new object
@@ -73,7 +75,7 @@ $gb_obj->setCacheProvider('redis', array('host' => 'localhost', 'port' => 6379))
 
 ## Development
 
-Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/GiantBomb/issues).
+Questions, problems or suggestions? Please post them on the [issue tracker](https://github.com/amalfra/giantbomb/issues).
 
 You can contribute changes by forking the project and submitting a pull request. Feel free to contribute :heart_eyes:
 
@@ -89,4 +91,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
