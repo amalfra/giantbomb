@@ -1,8 +1,8 @@
 <?php
 
-namespace GiantBomb;
+namespace Amalfra\GiantBomb;
 
-use Exception;
+use \Exception;
 
 /**
  * Define a custom exception class for api wrapper

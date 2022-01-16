@@ -1,25 +1,21 @@
 <?php
 
-namespace GiantBomb;
+namespace Amalfra\GiantBomb;
 
-use Doctrine\Common\Cache\CacheProvider;
+use \Redis;
+use \Exception;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\RedisCache;
-use Redis;
 
 /**
  * GiantBomb PHP wrapper is a simple class written in PHP to
- * make interactions with GiantBomb api easier.
+ * make interactions with GiantBomb API easier.
  *
- * @package    GiantBomb
- * @version    2.0.0
- * @author     Amal Francis
- * @author     Koroban
- * @license    MIT License
+ * @package    Amalfra\GiantBomb
  */
 class GiantBomb {
   /**
-   * The api key
+   * The API key
    *
    * @type   string
    */
@@ -48,8 +44,7 @@ class GiantBomb {
   public $result = array();
 
   /**
-   * api endpoint
-   * prefix for all API cals
+   * API endpoint, prefix for all API cals
    *
    * @type   string
    */
@@ -316,7 +311,7 @@ class GiantBomb {
    * @return array response
    */
   public function company($company_id, $field_list = array()) {
-    return $this->get_object('company', $id, $field_list);
+    return $this->get_object('company', $company_id, $field_list);
   }
 
   /**
