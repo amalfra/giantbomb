@@ -3,13 +3,11 @@ Giantbomb API
 [![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
 
 A library for easy interaction with Giantbomb API. Features are:
-* PSR-4 autoloading support
 * Caching support
 
-> Get your API Key at http://api.giantbomb.com
+> Get your API Key at https://www.giantbomb.com/api
 
 ## Requirements
-* PHP >= 7.4
 * PHP Redis extension. It can be installed using following command:
 ```sh
 pecl install redis
