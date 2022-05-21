@@ -1,6 +1,7 @@
 Giantbomb API
 ==============================
 [![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
+![Build Status](https://github.com/amalfra/giantbomb/actions/workflows/test.yml/badge.svg?branch=main)
 
 A library for easy interaction with Giantbomb API. Features are:
 * Caching support
@@ -27,13 +28,17 @@ You can load the wrapper classes using namespace as:
 ```php
 require __DIR__ . '/vendor/autoload.php';
 
-use \Amalfra\GiantBomb;
+use \Amalfra\GiantBomb\Client as GiantBomb;
 ```
 
 Now create a new object
 
 ```php
-$gb_obj = new GiantBomb('YOUR_KEY');
+$config = array(
+	'token' => 'YOUR_KEY',
+);
+
+$gb_obj = new GiantBomb($config);
 ```
 
 Now the available API methods can be called using the instance. All the result from API will be returned as an object. If any status code other than 200 is returned an exception would be thrown.
@@ -42,12 +47,18 @@ Now the available API methods can be called using the instance. All the result f
 * game(game_id, field_list)
 * games(filter, limit, offset, platform, sort, field_list)
 * review(review_id, field_list)
+* reviews(filter, limit, offset, sort, field_list)
 * game_rating(rating_id, field_list)
+* game_ratings(filter, limit, offset, sort, field_list)
 * company(company_id, field_list)
+* companies(filter, limit, offset, sort, field_list)
 * character(character_id, field_list)
-* search(query, field_list, limit, page, resources)
-* genres(field_list, limit, offset)
+* characters(filter, limit, offset, sort, field_list)
+* genre(genre_id, field_list)
+* genres(limit, offset, field_list)
+* platform(platform_id, field_list)
 * platforms(field_list, limit, offset, filter, sort)
+* search(query, field_list, limit, page, resources)
 
 ### Cache
 You can configure caching to prevent hitting API if same queries are made again. Currently supported caching methods are:
