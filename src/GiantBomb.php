@@ -186,18 +186,6 @@ class GiantBomb {
   }
 
   /**
-   * Get character by id
-   *
-   * @param  $id         string  ID to request
-   * @param  $field_list array   list of fields to response
-   *
-   * @return array response
-   */
-  public function character($character_id, $field_list = array()) {
-    return $this->get_object('character', $character_id, $field_list);
-  }
-
-  /**
    * Perform a search with given keyword
    *
    * @param  $query      string  keyword to search
@@ -218,25 +206,6 @@ class GiantBomb {
     );
 
     return $this->get_objects('search', $params);
-  }
-
-  /**
-   * List genres 
-   *
-   * @param $field_list array    list of field to result
-   * @param $limit      integer  limit result count by given limit
-   * @param $offset     integer  offset of results
-   *
-   * @return array list of games
-   */
-  public function genres($field_list = array(), $limit = 100, $offset = 0) {
-    $params = array(
-      'field_list'  => implode(',', $field_list),
-      'limit'       => $limit,
-      'offset'      => $offset
-    );
-
-    return $this->get_objects('genres', $params);
   }
 
   /**
