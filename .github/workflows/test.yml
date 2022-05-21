@@ -1,0 +1,20 @@
+on: [push, pull_request]
+name: Test
+jobs:
+  test:
+    strategy:
+      matrix:
+        php-version: ['7.4', '8.0', '8.1']
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install deps
+        run: composer install
+      - name: Lint
+        run: ./scripts/phplint.sh
