@@ -9,6 +9,8 @@ use Amalfra\GiantBomb\API\GameRatings;
 use Amalfra\GiantBomb\API\Companies;
 use Amalfra\GiantBomb\API\Characters;
 use Amalfra\GiantBomb\API\Genres;
+use Amalfra\GiantBomb\API\Platforms;
+use Amalfra\GiantBomb\API\Search;
 
 /**
  * Class Client
@@ -90,5 +92,17 @@ class Client {
 
   public function genre($id = 0) {
     return Genres::get_genre($id);
+  }
+
+  public function platforms($options = array()) {
+    return Platforms::platforms($options);
+  }
+
+  public function platform($id = 0) {
+    return Platforms::get_platform($id);
+  }
+
+  public function search($options = array()) {
+    return Search::get($options);
   }
 }
