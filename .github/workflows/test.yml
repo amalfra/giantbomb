@@ -18,3 +18,5 @@ jobs:
         run: composer install
       - name: Lint
         run: ./scripts/phplint.sh
+      - name: Test
+        run: ./vendor/bin/phpunit
