@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false" backupStaticAttributes="false" colors="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" processIsolation="false" stopOnFailure="false" bootstrap="tests/bootstrap.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">./src/GiantBomb/</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="GiantBomb Test Suite">
+      <directory>./tests/GiantBomb/</directory>
+    </testsuite>
+  </testsuites>
+  <groups>
+    <exclude>
+      <group>functional</group>
+    </exclude>
+  </groups>
+</phpunit>
