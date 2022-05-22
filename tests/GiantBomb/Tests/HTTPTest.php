@@ -81,7 +81,8 @@ class HTTPTest extends TestCase {
 
     $this->getProtectedProperty($api, 'inject', [&$var]);
 
-    if (array_key_exists('auth_token', $var)) {
+    if (array_key_exists('api_key', $var) &&
+      array_key_exists('format', $var)) {
       $this->assertTrue(true);
     } else {
       $this->fail();
