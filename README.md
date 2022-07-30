@@ -50,7 +50,9 @@ Now the available API methods can be called using the instance. All the result f
 | game(game_id, field_list) | field_list should be comma seperated values |
 | games(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;platforms: 2,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'aliases:Desert Strike'<br>) | |
 | company(company_id, field_list) | field_list should be comma seperated values |
-| companies(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;platforms: 2,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:7'<br>) | |
+| companies(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:7'<br>) | |
+| genre(genre_id, field_list) | field_list should be comma seperated values |
+| genres(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20<br>) | |
 
 * review(review_id, field_list)
 * reviews(filter, limit, offset, sort, field_list)
@@ -58,8 +60,6 @@ Now the available API methods can be called using the instance. All the result f
 * game_ratings(filter, limit, offset, sort, field_list)
 * character(character_id, field_list)
 * characters(filter, limit, offset, sort, field_list)
-* genre(genre_id, field_list)
-* genres(limit, offset, field_list)
 * platform(platform_id, field_list)
 * platforms(field_list, limit, offset, filter, sort)
 * search(query, field_list, limit, page, resources)
