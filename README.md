@@ -2,6 +2,7 @@ Giantbomb API
 ==============================
 [![GitHub release](https://img.shields.io/github/release/amalfra/GiantBomb.svg)](https://github.com/amalfra/GiantBomb/releases)
 ![Build Status](https://github.com/amalfra/giantbomb/actions/workflows/test.yml/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/amalfra/giantbomb/badge.svg)](https://coveralls.io/github/amalfra/giantbomb)
 
 A library for easy interaction with Giantbomb API. Features are:
 * Caching support
