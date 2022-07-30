@@ -3,6 +3,7 @@
 namespace Amalfra\GiantBomb;
 
 use Amalfra\GiantBomb\Exceptions\ConfigException;
+use Amalfra\GiantBomb\Exceptions\UnsupportedException;
 use Amalfra\GiantBomb\API\Games;
 use Amalfra\GiantBomb\API\Reviews;
 use Amalfra\GiantBomb\API\GameRatings;
@@ -27,7 +28,7 @@ const METHOD_CLASS_MAP = array(
   'genre' => Genres::class,
   'platforms' => Platforms::class,
   'platform' => Platforms::class,
-  'get' => Search::class,
+  'search' => Search::class,
 );
 
 /**
@@ -70,9 +71,14 @@ class Client {
    * @params  string       $method
    * @params  array        $args
    *
+   * @throws  Amalfra\GiantBomb\Exceptions\UnsupportedException    When not defined method is called
    */
   public function __call($method, $args) {
     $class_name = METHOD_CLASS_MAP[$method];
+    if (!isset($class_name)) {
+      throw new UnsupportedException('This method is not supported.');
+    }
+
     return call_user_func_array(array($class_name, $method), $args);
   }
 }
