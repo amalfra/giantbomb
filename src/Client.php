@@ -18,7 +18,7 @@ use Amalfra\GiantBomb\API\Search;
  * @package Amalfra\GiantBomb
  */
 class Client {
-  public static $base_url   = 'http://www.giantbomb.com/api/';
+  public static $base_url   = 'https://www.giantbomb.com/api/';
   public static $auth_token = null;
   public static $headers    = array();
 
