@@ -44,8 +44,10 @@ $gb_obj = new GiantBomb($config);
 Now the available API methods can be called using the instance. All the result from API will be returned as an object. If any status code other than 200 is returned an exception would be thrown.
 
 ### Currently Available Methods
-* game(game_id, field_list)
-* games(filter, limit, offset, platform, sort, field_list)
+| Method | Description |
+| --- | --- |
+| game(game_id, field_list) | field_list should be an array |
+| games(array(<br>'field_list' => 'name,id', <br>'limit' => 10, <br>'offset' => 20, <br>'platforms' => 2, <br>'sort' => 'id:desc', <br>'filter' => 'aliases:Desert Strike'<br>)) | |
 * review(review_id, field_list)
 * reviews(filter, limit, offset, sort, field_list)
 * game_rating(rating_id, field_list)
