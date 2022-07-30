@@ -23,7 +23,11 @@ class Games extends HTTP {
     return self::process_request('games', $options);
   }
 
-  public static function game($id = 0) {
-    return self::process_request('game/'. $id);
+  public static function game($id = 0, $field_list = null) {
+    $options = array(
+      'field_list' => $field_list,
+    );
+
+    return self::process_request('game/'. $id, $options);
   }
 }

@@ -164,6 +164,21 @@ class GamesTest extends TestCase {
   }
 
   /** @test */
+  public function gameWithfield_list() {
+    $config = array(
+      'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
+    );
+    $giantbomb = new Client($config);
+    $resp = $giantbomb->game(121, 'id,name');
+
+    $this->assertEquals('0', $resp['version']);
+    $this->assertEquals('OK', $resp['error']);
+    $this->assertEquals(1, $resp['limit']);
+    $this->assertEquals(0, $resp['offset']);
+    $this->assertEquals(['id', 'name'], array_unique(array_keys($resp['results'])));
+  }
+
+  /** @test */
   public function game() {
     $config = array(
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
