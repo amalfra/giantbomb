@@ -20,3 +20,5 @@ jobs:
         run: ./scripts/phplint.sh
       - name: Test
         run: ./vendor/bin/phpunit
+        env:
+          GIANTBOMB_TESTS_API_KEY: ${{ secrets.GIANTBOMB_TESTS_API_KEY }}
