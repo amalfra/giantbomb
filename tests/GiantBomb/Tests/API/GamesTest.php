@@ -40,9 +40,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'field_list' => 'name',
-    ));
+    $resp = $giantbomb->games(
+      field_list: 'name',
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);
@@ -57,9 +57,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'limit' => 10,
-    ));
+    $resp = $giantbomb->games(
+      limit: 10,
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);
@@ -74,9 +74,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'offset' => 20,
-    ));
+    $resp = $giantbomb->games(
+      offset: 20,
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);
@@ -91,9 +91,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'platforms' => 90,
-    ));
+    $resp = $giantbomb->games(
+      platforms: 90,
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);
@@ -108,9 +108,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'sort' => 'id:desc',
-    ));
+    $resp = $giantbomb->games(
+      sort: 'id:desc',
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);
@@ -125,9 +125,9 @@ class GamesTest extends TestCase {
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
     $giantbomb = new Client($config);
-    $resp = $giantbomb->games(array(
-      'filter' => 'aliases:Desert Strike',
-    ));
+    $resp = $giantbomb->games(
+      filter: 'aliases:Desert Strike',
+    );
 
     $this->assertEquals('1.0', $resp['version']);
     $this->assertEquals('OK', $resp['error']);

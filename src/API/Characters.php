@@ -22,7 +22,7 @@ class Characters extends HTTP {
     return self::process_request('characters', $options);
   }
 
-  public static function get_character($id = 0) {
+  public static function character($id = 0) {
     return self::process_request('character/'. $id);
   }
 }

@@ -10,7 +10,7 @@ use Amalfra\GiantBomb\HTTP;
  * @package Amalfra\GiantBomb\API
  */
 class Games extends HTTP {
-  public static function games($options = array()) {
+  public static function games(...$options) {
     self::validate($options, array(
       'field_list',
       'limit',
@@ -23,7 +23,7 @@ class Games extends HTTP {
     return self::process_request('games', $options);
   }
 
-  public static function get_game($id = 0) {
+  public static function game($id = 0) {
     return self::process_request('game/'. $id);
   }
 }

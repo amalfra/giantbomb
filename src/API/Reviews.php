@@ -22,7 +22,7 @@ class Reviews extends HTTP {
     return self::process_request('reviews', $options);
   }
 
-  public static function get_review($id = 0) {
+  public static function review($id = 0) {
     return self::process_request('review/'. $id);
   }
 }

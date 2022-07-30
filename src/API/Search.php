@@ -10,7 +10,7 @@ use Amalfra\GiantBomb\HTTP;
  * @package Amalfra\GiantBomb\API
  */
 class Search extends HTTP {
-  public static function get($options = array()) {
+  public static function search($options = array()) {
     self::validate($options, array(
       'field_list',
       'limit',

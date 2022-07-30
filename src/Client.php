@@ -12,6 +12,24 @@ use Amalfra\GiantBomb\API\Genres;
 use Amalfra\GiantBomb\API\Platforms;
 use Amalfra\GiantBomb\API\Search;
 
+const METHOD_CLASS_MAP = array(
+  'game' => Games::class,
+  'games' => Games::class,
+  'reviews' => Reviews::class,
+  'review' => Reviews::class,
+  'game_ratings' => GameRatings::class,
+  'game_rating' => GameRatings::class,
+  'companies' => Companies::class,
+  'company' => Companies::class,
+  'characters' => Characters::class,
+  'character' => Characters::class,
+  'genres' => Genres::class,
+  'genre' => Genres::class,
+  'platforms' => Platforms::class,
+  'platform' => Platforms::class,
+  'get' => Search::class,
+);
+
 /**
  * Class Client
  *
@@ -46,63 +64,15 @@ class Client {
     }
   }
 
-  public function games($options = array()) {
-    return Games::games($options);
-  }
-
-  public function game($id = 0) {
-    return Games::get_game($id);
-  }
-
-  public function reviews($options = array()) {
-    return Reviews::reviews($options);
-  }
-
-  public function review($id = 0) {
-    return Reviews::get_review($id);
-  }
-
-  public function game_ratings($options = array()) {
-    return GameRatings::game_ratings($options);
-  }
-
-  public function game_rating($id = 0) {
-    return GameRatings::get_game_rating($id);
-  }
-
-  public function companies($options = array()) {
-    return Companies::companies($options);
-  }
-
-  public function company($id = 0) {
-    return Companies::get_company($id);
-  }
-
-  public function characters($options = array()) {
-    return Characters::characters($options);
-  }
-
-  public function character($id = 0) {
-    return Characters::get_character($id);
-  }
-
-  public function genres($options = array()) {
-    return Genres::genres($options);
-  }
-
-  public function genre($id = 0) {
-    return Genres::get_genre($id);
-  }
-
-  public function platforms($options = array()) {
-    return Platforms::platforms($options);
-  }
-
-  public function platform($id = 0) {
-    return Platforms::get_platform($id);
-  }
-
-  public function search($options = array()) {
-    return Search::get($options);
+  /**
+   * Calls underlying API implementation method
+   *
+   * @params  string       $method
+   * @params  array        $args
+   *
+   */
+  public function __call($method, $args) {
+    $class_name = METHOD_CLASS_MAP[$method];
+    return call_user_func_array(array($class_name, $method), $args);
   }
 }

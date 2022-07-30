@@ -47,7 +47,7 @@ Now the available API methods can be called using the instance. All the result f
 | Method | Description |
 | --- | --- |
 | game(game_id, field_list) | field_list should be an array |
-| games(array(<br>'field_list' => 'name,id', <br>'limit' => 10, <br>'offset' => 20, <br>'platforms' => 2, <br>'sort' => 'id:desc', <br>'filter' => 'aliases:Desert Strike'<br>)) | |
+| games(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;platforms: 2,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'aliases:Desert Strike'<br>) | |
 * review(review_id, field_list)
 * reviews(filter, limit, offset, sort, field_list)
 * game_rating(rating_id, field_list)

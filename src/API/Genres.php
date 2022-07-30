@@ -20,7 +20,7 @@ class Genres extends HTTP {
     return self::process_request('genres', $options);
   }
 
-  public static function get_genre($id = 0) {
+  public static function genre($id = 0) {
     return self::process_request('genre/'. $id);
   }
 }

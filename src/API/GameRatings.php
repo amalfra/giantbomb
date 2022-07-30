@@ -22,7 +22,7 @@ class GameRatings extends HTTP {
     return self::process_request('game_ratings', $options);
   }
 
-  public static function get_game_rating($id = 0) {
+  public static function game_rating($id = 0) {
     return self::process_request('game_rating/'. $id);
   }
 }

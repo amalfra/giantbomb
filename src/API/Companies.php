@@ -22,7 +22,7 @@ class Companies extends HTTP {
     return self::process_request('companies', $options);
   }
 
-  public static function get_company($id = 0) {
+  public static function company($id = 0) {
     return self::process_request('company/'. $id);
   }
 }

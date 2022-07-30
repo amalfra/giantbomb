@@ -22,7 +22,7 @@ class Platforms extends HTTP {
     return self::process_request('platforms', $options);
   }
 
-  public static function get_platform($id = 0) {
+  public static function platform($id = 0) {
     return self::process_request('platform/'. $id);
   }
 }
