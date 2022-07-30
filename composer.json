@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4.0",
+    "php": ">=8.0.0",
     "rmccue/requests": "^2.0.4",
     "doctrine/cache": "^2.2.0",
     "ext-redis": "*"
