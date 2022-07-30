@@ -1,6 +1,6 @@
 #! /bin/sh
 
-find . -iname '*.php' -path "./src/*" | while read line; do
+find . -iname '*.php' -path "./src/*" -or -path "./tests/*" | while read line; do
   echo "Linting file - $line"
   lint_cmd="$(php -l $line)"
   rs=$?
