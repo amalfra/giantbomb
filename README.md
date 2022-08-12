@@ -59,9 +59,9 @@ Now the available API methods can be called using the instance. All the result f
 | reviews(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'deck,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:3'<br>) | |
 | game_rating(game_rating_id, field_list) | field_list should be comma seperated values |
 | game_ratings(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:3'<br>) | |
+| character(character_id, field_list) | field_list should be comma seperated values |
+| characters(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:3'<br>) | |
 
-* character(character_id, field_list)
-* characters(filter, limit, offset, sort, field_list)
 * search(query, field_list, limit, page, resources)
 
 ### Cache
