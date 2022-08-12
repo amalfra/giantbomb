@@ -10,7 +10,7 @@ use Amalfra\GiantBomb\HTTP;
  * @package Amalfra\GiantBomb\API
  */
 class Reviews extends HTTP {
-  public static function reviews($options = array()) {
+  public static function reviews(...$options) {
     self::validate($options, array(
       'field_list',
       'limit',
@@ -22,7 +22,11 @@ class Reviews extends HTTP {
     return self::process_request('reviews', $options);
   }
 
-  public static function review($id = 0) {
-    return self::process_request('review/'. $id);
+  public static function review($id = 0, $field_list = null) {
+    $options = array(
+      'field_list' => $field_list,
+    );
+
+    return self::process_request('review/'. $id, $options);
   }
 }

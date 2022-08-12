@@ -55,9 +55,9 @@ Now the available API methods can be called using the instance. All the result f
 | genres(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20<br>) | |
 | platform(platform_id, field_list) | field_list should be comma seperated values |
 | platforms(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:3'<br>) | |
+| review(review_id, field_list) | field_list should be comma seperated values |
+| reviews(<br>&nbsp;&nbsp;&nbsp;&nbsp;field_list: 'name,id',<br>&nbsp;&nbsp;&nbsp;&nbsp;limit: 10,<br>&nbsp;&nbsp;&nbsp;&nbsp;offset: 20,<br>&nbsp;&nbsp;&nbsp;&nbsp;sort: 'id:desc',<br>&nbsp;&nbsp;&nbsp;&nbsp;filter: 'id:3'<br>) | |
 
-* review(review_id, field_list)
-* reviews(filter, limit, offset, sort, field_list)
 * game_rating(rating_id, field_list)
 * game_ratings(filter, limit, offset, sort, field_list)
 * character(character_id, field_list)
