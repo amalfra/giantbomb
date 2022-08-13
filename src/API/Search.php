@@ -10,14 +10,14 @@ use Amalfra\GiantBomb\HTTP;
  * @package Amalfra\GiantBomb\API
  */
 class Search extends HTTP {
-  public static function search($options = array()) {
+  public static function search(...$options) {
     self::validate($options, array(
       'field_list',
       'limit',
       'page',
       'query',
       'resources',
-    ));
+    ), array('query'));
 
     return self::process_request('search', $options);
   }
