@@ -113,10 +113,14 @@ class Client {
 
     if ($this->cache) {
       $signature = $this->create_signature($method, $args);
-      echo '[DEBUG] Checking for cache key: ' . $signature . "\n";
+      if (self::$debug) {
+        echo '[DEBUG] Checking for cache key: ' . $signature . "\n";
+      }
       $cache_item = $this->cache->getItem($signature);
       if ($cache_item->isHit()) {
-        echo '[DEBUG] + Cache hit for cache key: ' . $signature . "\n";
+        if (self::$debug) {
+          echo '[DEBUG] + Cache hit for cache key: ' . $signature . "\n";
+        }
         return $this->cache->getItem($signature)->get();
       }
     }
@@ -140,7 +144,9 @@ class Client {
    * @return array response of API
    */
   public function set_cache_provider($provider = null, $config = array()) {
-    echo '[DEBUG] Setting cache provider: ' . $provider . "\n";
+    if (self::$debug) {
+      echo '[DEBUG] Setting cache provider: ' . $provider . "\n";
+    }
     if ($provider) {
       switch ($provider) {
         case 'inmemory':
@@ -153,7 +159,9 @@ class Client {
           if (!isset($config['port'])) {
             throw new ConfigException('port config not specified');
           }
-          echo '[DEBUG] Using redis config: ' . $config['host'] . ', '. $config['host'] . "\n";
+          if (self::$debug) {
+            echo '[DEBUG] Using redis config: ' . $config['host'] . ', '. $config['port'] . "\n";
+          }
           $redis = new Redis();
           $redis->connect($config['host'], $config['port']);
 
