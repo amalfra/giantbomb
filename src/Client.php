@@ -153,6 +153,7 @@ class Client {
           if (!isset($config['port'])) {
             throw new ConfigException('port config not specified');
           }
+          echo '[DEBUG] Using redis config: ' . $config['host'] . ', '. $config['host'] . "\n";
           $redis = new Redis();
           $redis->connect($config['host'], $config['port']);
 

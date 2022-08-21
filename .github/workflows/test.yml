@@ -7,6 +7,14 @@ jobs:
         php-version: ['8.1']
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -22,6 +30,7 @@ jobs:
         run: ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
         env:
           GIANTBOMB_TESTS_API_KEY: ${{ secrets.GIANTBOMB_TESTS_API_KEY }}
+          GIANTBOMB_TESTS_REDIS_HOST: redis
       - name: Upload coverage results to Coveralls
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}

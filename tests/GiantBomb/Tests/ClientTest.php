@@ -100,7 +100,7 @@ class ClientTest extends TestCase {
     );
     $giantbomb = new Client($config );
     try {
-      $giantbomb->set_cache_provider('redis', array('host' => 'localhost'));
+      $giantbomb->set_cache_provider('redis', array('host' => getenv('GIANTBOMB_TESTS_REDIS_HOST') || 'localhost'));
       $value = self::getProperty($giantbomb, 'cache');
       $this->assertInstanceOf(RedisAdapter::class, $value);
     } catch (ConfigException $e) {
@@ -114,7 +114,7 @@ class ClientTest extends TestCase {
       'token' => 'abcd',
     );
     $giantbomb = new Client($config );
-    $giantbomb->set_cache_provider('redis', array('host' => 'localhost', 'port' => 6379));
+    $giantbomb->set_cache_provider('redis', array('host' => getenv('GIANTBOMB_TESTS_REDIS_HOST') || 'localhost', 'port' => 6379));
     $value = self::getProperty($giantbomb, 'cache');
     $this->assertInstanceOf(RedisAdapter::class, $value);
   }
