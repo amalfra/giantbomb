@@ -68,21 +68,21 @@ You can configure caching to prevent hitting API if same queries are made again.
 * inmemory: cache will be stored in memory array. This won't be persisted after your script exits.
 * redis: cache will be stored in redis store which can be configured.
 
-Cache can be configured using ```setCacheProvider``` method of GiantBomb instance. If it's not configured caching will be disabled and API will always be hit each time a method is called. ```setCacheProvider``` method accepts two parameter: 
+Cache can be configured using ```set_cache_provider``` method of GiantBomb instance. If it's not configured caching will be disabled and API will always be hit each time a method is called. ```set_cache_provider``` method accepts two parameter: 
 1. [required] cache type eg: inmemory, redis etc
 2. [optional] an associative array in which additional configuration details required for setting up the cache method can be given eg: redis server host and port values
 
 #### using inmemory cache method
-This method does not need any additional configuration option than just activating by calling ```setCacheProvider``` method with ```inmemory``` as first parameter.
+This method does not need any additional configuration option than just activating by calling ```set_cache_provider``` method with ```inmemory``` as first parameter.
 eg:
 ```php
-$gb_obj->setCacheProvider('inmemory');
+$gb_obj->set_cache_provider('inmemory');
 ```
 #### using redis cache method
-This method can be activated by calling ```setCacheProvider``` method with ```redis``` as first parameter. You will also need to specify redis server host and port as second parameter.
+This method can be activated by calling ```set_cache_provider``` method with ```redis``` as first parameter. You will also need to specify redis server host and port as second parameter.
 eg:
 ```php
-$gb_obj->setCacheProvider('redis', array('host' => 'localhost', 'port' => 6379));
+$gb_obj->set_cache_provider('redis', array('host' => 'localhost', 'port' => 6379));
 ```
 
 ## Development

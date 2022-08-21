@@ -36,7 +36,7 @@ class HTTP {
     }
   }
 
-  protected static function tfTostring(&$value, $key) {
+  protected static function tf_to_string(&$value, $key) {
     if ($value === true) {
       $value = 'true';
     } else if ($value === false) {
@@ -79,7 +79,7 @@ class HTTP {
 
   protected static function process_request($path, $options = array(), $method = 'GET') {
     self::inject($options);
-    array_walk($options, 'self::tfTostring');
+    array_walk($options, 'self::tf_to_string');
 
     $resp = self::request($path, $options, $method);
     return self::handle_response($resp);
