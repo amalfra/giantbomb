@@ -54,14 +54,14 @@ class HTTPTest extends TestCase {
 
   // validate() tests end
 
-  // tfTostring() tests start
+  // tf_to_string() tests start
 
   /** @test */
-  public function validateTfTostring() {
+  public function validatetf_to_string() {
     $api = new HTTP();
     $var = true;
 
-    $this->getProtectedProperty($api, 'tfTostring', [&$var, &$var]);
+    $this->getProtectedProperty($api, 'tf_to_string', [&$var, &$var]);
     
     if (gettype($var) === 'string') {
       $this->assertTrue(true);
@@ -70,7 +70,7 @@ class HTTPTest extends TestCase {
     }
   }
 
-  // tfTostring() tests end
+  // tf_to_string() tests end
 
   // inject() tests start
 
