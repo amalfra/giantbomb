@@ -19,7 +19,7 @@
     "php": ">=8.0.0",
     "rmccue/requests": "^2.0.4",
     "ext-redis": "*",
-    "symfony/cache": "^6.1"
+    "symfony/cache": "6.0.11"
   },
   "require-dev": {
     "phpunit/phpunit": "~9.5.21",
