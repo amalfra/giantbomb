@@ -55,7 +55,9 @@ class Client {
     $this->validate($config);
 
     self::$auth_token = $config['token'];
-    self::$debug = $config['debug'];
+    if (array_key_exists('debug', $config)) {
+      self::$debug = $config['debug'];
+    }
 
     self::$headers = array(
       'Content-Type' => 'application/json',
