@@ -89,7 +89,7 @@ class Client {
   private function create_signature($url, $params) {
     $url = $url . '?' . http_build_query($params);
 
-    return 'giantbomb-'.substr(sha1($url), 0, 7);
+    return 'giantbomb-' . substr(sha1($url . '-token-' . self::$auth_token), 0, 7);
   }
 
   /**

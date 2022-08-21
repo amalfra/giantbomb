@@ -119,5 +119,28 @@ class ClientTest extends TestCase {
     $this->assertInstanceOf(RedisAdapter::class, $value);
   }
 
+   /** @test */
+   public function validateSettingCacheProviderWithRedisProviderCachehit() {
+    $config = array(
+      'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
+    );
+    $giantbomb = new Client($config );
+    $giantbomb->set_cache_provider('redis', array('host' => 'localhost', 'port' => 6379));
+    $giantbomb->companies();
+
+    // try 1
+    $start_time =  microtime(true);
+    $giantbomb->companies();
+    $time_consumed = (round(microtime(true) - $start_time, 3) * 1000) * 0.001;
+    $this->assertLessThanOrEqual(1, $time_consumed);
+    $this->assertGreaterThanOrEqual(0, $time_consumed);
+    // try 2
+    $start_time =  microtime(true);
+    $giantbomb->companies();
+    $time_consumed = (round(microtime(true) - $start_time, 3) * 1000) * 0.001;
+    $this->assertLessThanOrEqual(1, $time_consumed);
+    $this->assertGreaterThanOrEqual(0, $time_consumed);
+  }
+
   // set_cache_provider() tests end
 }
