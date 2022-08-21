@@ -10,7 +10,7 @@ use Amalfra\GiantBomb\Client;
 use Amalfra\GiantBomb\Exceptions\ConfigException;
 
 class ClientTest extends TestCase {
-  public static function getProperty($object, $property) {
+  private static function getProperty($object, $property) {
     $reflectedClass = new ReflectionClass($object);
     $reflection = $reflectedClass->getProperty($property);
     $reflection->setAccessible(true);
