@@ -31,5 +31,15 @@ class ClientTest extends TestCase {
     ), Client::$headers);
   }
 
+  /** @test */
+  public function validateObjectCreationWithDebug() {
+    $config = array(
+      'token' => 'abcd',
+      'debug' => true,
+    );
+    $giantbomb = new Client($config);
+    $this->assertEquals(true, Client::$debug);
+  }
+
   // __construct() tests end
 }
