@@ -101,7 +101,7 @@ class Client {
    * @throws  Amalfra\GiantBomb\Exceptions\UnsupportedException    When not defined method is called
    */
   public function __call($method, $args) {
-    // diretly call methods defined in this call
+    // directly call methods defined in this class
     if (method_exists($this, $method)) {
       return call_user_func_array(array($this, $method), $args);
     }
@@ -156,8 +156,7 @@ class Client {
           $redis = new Redis();
           $redis->connect($config['host'], $config['port']);
 
-          $this->cache = new RedisAdapter();
-          $this->cache->setRedis($redis);
+          $this->cache = new RedisAdapter($redis);
           break;
         default:
           throw new ConfigException('Unsupported cache type: ' . $provider);

@@ -2,10 +2,10 @@
 
 namespace Amalfra\GiantBomb\Tests\API;
 
-use \InvalidArgumentException;
-use Amalfra\GiantBomb\Client;
 use Exception;
+use \InvalidArgumentException;
 use \PHPUnit\Framework\TestCase;
+use Amalfra\GiantBomb\Client;
 
 class SearchTest extends TestCase {
   // search() tests start

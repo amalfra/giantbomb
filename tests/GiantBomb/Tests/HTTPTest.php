@@ -2,10 +2,10 @@
 
 namespace Amalfra\GiantBomb\Tests;
 
-use Amalfra\GiantBomb\HTTP;
 use \PHPUnit\Framework\TestCase;
 use \ReflectionMethod;
 use \InvalidArgumentException;
+use Amalfra\GiantBomb\HTTP;
 
 class HTTPTest extends TestCase {
   private function getProtectedProperty($object, $property, $args = []) {

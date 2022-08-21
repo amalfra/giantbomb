@@ -2,8 +2,8 @@
 
 namespace Amalfra\GiantBomb\Tests\API;
 
-use Amalfra\GiantBomb\Client;
 use \PHPUnit\Framework\TestCase;
+use Amalfra\GiantBomb\Client;
 
 class PlatformsTest extends TestCase {
   // platforms() tests start
