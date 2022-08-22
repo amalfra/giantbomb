@@ -19,4 +19,19 @@ class HTTPExceptionTest extends TestCase {
   }
 
   // __construct() tests end
+
+  // __toString() tests start
+
+  /** @test */
+  public function validate__toString() {
+    try {		
+      $i = new HTTPException('Exception message', 123);
+      throw $i;
+    } catch (HTTPException $e) {
+      $this->assertEquals('Amalfra\GiantBomb\Exceptions\HTTPException' . ': [123]: Exception message',
+      trim($e->__toString()));
+    }
+  }
+
+  // __toString() tests end
 }
