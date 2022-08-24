@@ -106,10 +106,10 @@ class Client {
       return call_user_func_array(array($this, $method), $args);
     }
 
-    $class_name = METHOD_CLASS_MAP[$method];
-    if (!isset($class_name)) {
+    if (!array_key_exists($method, METHOD_CLASS_MAP)) {
       throw new UnsupportedException('This method is not supported.');
     }
+    $class_name = METHOD_CLASS_MAP[$method];
 
     if ($this->cache) {
       $signature = $this->create_signature($method, $args);

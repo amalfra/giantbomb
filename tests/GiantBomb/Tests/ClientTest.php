@@ -8,6 +8,7 @@ use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Amalfra\GiantBomb\Client;
 use Amalfra\GiantBomb\Exceptions\ConfigException;
+use Amalfra\GiantBomb\Exceptions\UnsupportedException;
 
 class ClientTest extends TestCase {
   private static function getProperty($object, $property) {
@@ -21,7 +22,7 @@ class ClientTest extends TestCase {
 
   /** @test */
   public function validateObjectCreationWithoutToken() {
-    try {		
+    try {
       $giantbomb = new Client();
     } catch (ConfigException $e) {
       $this->assertTrue(true);
@@ -106,6 +107,14 @@ class ClientTest extends TestCase {
     } catch (ConfigException $e) {
       $this->assertEquals('port config not specified', $e->getMessage());
     }
+
+    try {
+      $giantbomb->set_cache_provider('redis');
+      $value = self::getProperty($giantbomb, 'cache');
+      $this->assertInstanceOf(RedisAdapter::class, $value);
+    } catch (ConfigException $e) {
+      $this->assertEquals('host config not specified', $e->getMessage());
+    }
   }
 
   /** @test */
@@ -124,7 +133,7 @@ class ClientTest extends TestCase {
     $config = array(
       'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
     );
-    $giantbomb = new Client($config );
+    $giantbomb = new Client($config);
     $giantbomb->set_cache_provider('redis', array('host' => 'localhost', 'port' => 6379));
     $giantbomb->companies();
 
@@ -143,4 +152,21 @@ class ClientTest extends TestCase {
   }
 
   // set_cache_provider() tests end
+
+  // __call() tests start
+
+  /** @test */
+  public function validateCallNotexistingMethod() {
+    try {
+      $config = array(
+        'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
+      );
+      $giantbomb = new Client($config);
+      $giantbomb->abcd();
+    } catch (UnsupportedException $e) {
+      $this->assertTrue(true);
+    }
+  }
+
+  // __call() tests end
 }
