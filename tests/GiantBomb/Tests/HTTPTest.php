@@ -6,6 +6,7 @@ use \PHPUnit\Framework\TestCase;
 use \ReflectionMethod;
 use \InvalidArgumentException;
 use Amalfra\GiantBomb\HTTP;
+use Amalfra\GiantBomb\Exceptions\HTTPException;
 
 class HTTPTest extends TestCase {
   private function getProtectedProperty($object, $property, $args = []) {
@@ -70,6 +71,20 @@ class HTTPTest extends TestCase {
     }
   }
 
+  /** @test */
+  public function validatetf_to_stringValueFalse() {
+    $api = new HTTP();
+    $var = false;
+
+    $this->getProtectedProperty($api, 'tf_to_string', [&$var, &$var]);
+    
+    if (gettype($var) === 'string') {
+      $this->assertTrue(true);
+    } else {
+      $this->fail();
+    }
+  }
+
   // tf_to_string() tests end
 
   // inject() tests start
@@ -90,4 +105,35 @@ class HTTPTest extends TestCase {
   }
 
   // inject() tests end
+
+  // handle_response() tests start
+
+  /** @test */
+  public function validateHandle_response() {
+    $api = new HTTP();
+    $mock = $this->getMockBuilder('Response')
+              ->disableOriginalConstructor()
+              ->getMock();
+    $mock->status_code = 204;
+
+    $this->assertTrue($this->getProtectedProperty($api, 'handle_response', [&$mock]));
+  }
+
+  /** @test */
+  public function validateHandle_responseInvalid() {
+    $api = new HTTP();
+    $mock = $this->getMockBuilder('Response')
+              ->disableOriginalConstructor()
+              ->getMock();
+    $mock->status_code = 400;
+    $mock->body = 'abcd';
+
+    try {
+      $this->assertTrue($this->getProtectedProperty($api, 'handle_response', [&$mock]));
+    } catch (HTTPException $e) {
+      $this->assertStringContainsStringIgnoringCase('An HTTP error with status code', $e->getMessage());
+    }
+  }
+
+  // handle_response() tests end
 }

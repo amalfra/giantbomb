@@ -4,7 +4,7 @@ namespace Amalfra\GiantBomb;
 
 use \InvalidArgumentException;
 use WpOrg\Requests\Requests;
-use Amalfra\GiantBomb\Exceptions\HTTPException as HTTPException;
+use Amalfra\GiantBomb\Exceptions\HTTPException;
 
 /**
  * Class HTTP
