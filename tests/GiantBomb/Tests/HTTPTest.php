@@ -136,4 +136,36 @@ class HTTPTest extends TestCase {
   }
 
   // handle_response() tests end
+
+  // request() tests start
+
+  /** @test */
+  public function validaterequestThrowExecptionUnknownMethod() {
+    $api = new HTTP();
+
+    try {		
+      $this->getProtectedProperty($api, 'request', ['/path', [], 'BLAH']);
+      $this->fail();
+    } catch (HTTPException $e) {
+      $this->assertTrue(true);
+    }
+  }
+
+  /** @test */
+  public function validaterequestPOSTMethod() {
+    $api = new HTTP();
+	
+    $resp = $this->getProtectedProperty($api, 'request', ['/accessories', [], 'POST']);
+    $this->assertNotNull($resp->body);
+  }
+
+  /** @test */
+  public function validaterequestDELETEMethod() {
+    $api = new HTTP();
+	
+    $resp = $this->getProtectedProperty($api, 'request', ['/accessories', [], 'DELETE']);
+    $this->assertNotNull($resp->body);
+  }
+
+  // request() tests end
 }
