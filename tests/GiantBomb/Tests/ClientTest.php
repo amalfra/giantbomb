@@ -168,5 +168,16 @@ class ClientTest extends TestCase {
     }
   }
 
+  /** @test */
+  public function validateCallExistingMethod() {
+    $config = array(
+      'token' => getenv('GIANTBOMB_TESTS_API_KEY'),
+    );
+    $giantbomb = new Client($config);
+    $result = $giantbomb->__call('set_cache_provider', ['inmemory']);
+    $this->assertNotTrue($result);
+    $this->assertNull(error_get_last());
+  }
+
   // __call() tests end
 }
